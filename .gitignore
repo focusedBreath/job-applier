@@ -1,0 +1,21 @@
+# Credentials
+credentials.env
+.env
+
+# Sessions
+sessions/
+
+# Reports
+reports/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

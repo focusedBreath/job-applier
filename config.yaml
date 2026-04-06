@@ -1,0 +1,45 @@
+search:
+  keywords:
+    - SOC
+    - cybersecurity
+    - software engineer
+  locations:
+    - Remote
+    - South Windsor, CT
+    - Hartford, CT
+  days_back: 7
+  experience_level: null
+  salary_min: null
+
+credentials:
+  linkedin_email: ""
+  linkedin_password: ""
+  indeed_email: ""
+  monster_email: ""
+  dice_email: ""
+
+browser:
+  headless: false
+  slow_mo: 200
+  timeout: 30000
+  user_data_dir: null
+
+limits:
+  applications_per_day: 50
+  delay_between_apps: 30
+  min_delay: 15
+  max_delay: 60
+  scraper_delay_min: 10
+  scraper_delay_max: 20
+
+ai:
+  enabled: true
+  endpoint: "http://127.0.0.1:1234/v1"
+  model: "openai/gpt-oss-20b"
+  pause_for_approval: false
+  startup_timeout: 30
+
+resume:
+  docx_path: "../Vishnu Srinivasan Resume.docx"
+  pdf_output: resume.pdf
+  generate_pdf: true
