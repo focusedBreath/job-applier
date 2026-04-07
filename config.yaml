@@ -1,11 +1,14 @@
 search:
   keywords:
     - SOC
+    - security operations center
     - cybersecurity
     - software engineer
   locations:
     - Remote
-    - South Windsor, CT
+    - New Jersey
+    - Massachusetts
+    - New York, NY
     - Hartford, CT
   days_back: 7
   experience_level: null

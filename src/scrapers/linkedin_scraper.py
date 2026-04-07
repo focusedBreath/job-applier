@@ -137,29 +137,6 @@ class LinkedInScraper(BaseScraper):
         if not self.page:
             self.page = self.browser.get_page("linkedin")
 
-        self.page.goto(
-            f"{self.BASE_URL}/jobs/search/?keywords=test",
-            wait_until="networkidle",
-            timeout=60000,
-        )
-        try:
-            self.page.wait_for_selector(
-                ".base-card.job-search-card, .base-search-card, a[href*='/jobs/view']",
-                timeout=15000,
-            )
-        except Exception:
-            pass
-        time.sleep(2)
-
-        page_text = self.page.inner_text("body").lower()
-
-        job_check = self.page.query_selector_all("a[href*='/jobs/view']")
-        if not job_check:
-            log.warning(
-                "LinkedIn requires login or blocked. Set LINKEDIN_EMAIL and LINKEDIN_PASSWORD in credentials.env"
-            )
-            return []
-
         all_jobs = []
 
         for keyword in keywords:
