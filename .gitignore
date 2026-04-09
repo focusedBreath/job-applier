@@ -1,17 +1,31 @@
-# Credentials
-credentials.env
+# Environment
 .env
+credentials/
+credentials.env
 
-# Sessions
-sessions/
-
-# Reports
+# Runtime data (persisted via Docker volume)
+data/
 reports/
+sessions/
 
 # Python
 __pycache__/
+*.py[cod]
 *.pyc
 .venv/
+venv/
+*.egg-info/
+dist/
+.ruff_cache/
+.mypy_cache/
+
+# Node
+ui/node_modules/
+ui/dist/
+
+# IDE
+.vscode/
+.idea/
 
 # OS
 .DS_Store
@@ -19,3 +33,8 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Playwright
+test-results/
+playwright-report/
+debug/
