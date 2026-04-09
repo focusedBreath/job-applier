@@ -1,0 +1,36 @@
+[project]
+name = "job-applier"
+version = "2.0.0"
+description = "AI-powered job application automator"
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=0.40.0",
+    "playwright>=1.40.0",
+    "python-docx>=1.1.0",
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "structlog>=24.0.0",
+    "aiosqlite>=0.20.0",
+    "fake-useragent>=1.4.0",
+    "tenacity>=8.2.0",
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "python-multipart>=0.0.9",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "ruff>=0.6.0",
+    "pyright>=1.1.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pyright]
+pythonVersion = "3.12"
+strict = true

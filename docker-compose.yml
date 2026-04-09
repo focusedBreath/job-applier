@@ -1,0 +1,16 @@
+services:
+  job-applier:
+    build: .
+    env_file: .env
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data        # SQLite DB, browser sessions, uploaded resume, overrides
+      - ./reports:/app/reports  # Session output
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/jobs/stats"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
