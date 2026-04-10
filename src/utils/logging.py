@@ -42,7 +42,6 @@ class BroadcastProcessor:
     def __call__(self, logger, method, event_dict: dict) -> dict:
         broadcaster.emit(
             event_dict.get("event", ""),
-            level=method,
             **{k: v for k, v in event_dict.items() if k != "event"},
         )
         return event_dict
