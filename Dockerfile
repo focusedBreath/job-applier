@@ -13,6 +13,7 @@ FROM python:3.12-slim
 RUN apt-get update && apt-get install -y --no-install-recommends \
     xvfb \
     xauth \
+    x11-utils \
     libglib2.0-0 \
     libnss3 \
     libnspr4 \
