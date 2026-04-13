@@ -67,7 +67,10 @@ async def start_scrape(
             cred_keys = _CRED_MAP[platform]
             email = getattr(config, cred_keys[0])
             password = getattr(config, cred_keys[1])
-            scraper = scraper_cls(browser, email, password)
+            extra = {}
+            if platform == Platform.LINKEDIN:
+                extra["manual_login"] = getattr(config, "linkedin_manual_login", False)
+            scraper = scraper_cls(browser, email, password, **extra)
             jobs = await scraper.scrape(keywords, locations, days_back)
             all_jobs.extend(jobs)
 

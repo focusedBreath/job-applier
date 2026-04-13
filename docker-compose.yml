@@ -1,11 +1,15 @@
 services:
   job-applier:
     build: .
+    env_file:
+      - path: .env
+        required: false      # optional — copy .env.example to .env to use; or configure via the Settings UI
     ports:
-      - "8080:8080"
+      - "8080:8080"        # App UI
+      - "6080:6080"        # noVNC browser viewer — open http://localhost:6080/vnc.html
     volumes:
-      - ./data:/app/data        # SQLite DB, browser sessions, uploaded resume, overrides
-      - ./reports:/app/reports  # Session output
+      - ./data:/app/data
+      - ./reports:/app/reports
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/api/jobs/stats"]

@@ -6,6 +6,7 @@ const MASK = "••••••••";
 interface Settings {
   linkedin_email: string;
   linkedin_password: string;
+  linkedin_manual_login: boolean;
   indeed_email: string;
   indeed_password: string;
   dice_email: string;
@@ -198,6 +199,17 @@ export function SettingsPanel() {
         <div className="grid grid-cols-2 gap-4">
           <Field label="LinkedIn Email" value={get("linkedin_email")} onChange={(v) => set("linkedin_email", v)} />
           <Field label="LinkedIn Password" value={get("linkedin_password")} onChange={(v) => set("linkedin_password", v)} sensitive />
+          <div className="col-span-2">
+            <label className="flex items-center gap-2 cursor-pointer select-none text-sm text-gray-400">
+              <input
+                type="checkbox"
+                checked={get("linkedin_manual_login")}
+                onChange={(e) => set("linkedin_manual_login", e.target.checked)}
+                className="w-4 h-4 rounded accent-blue-500"
+              />
+              Manual LinkedIn login (skip auto-login — complete login via noVNC at localhost:6080)
+            </label>
+          </div>
           <Field label="Indeed Email" value={get("indeed_email")} onChange={(v) => set("indeed_email", v)} />
           <Field label="Indeed Password" value={get("indeed_password")} onChange={(v) => set("indeed_password", v)} sensitive />
           <Field label="Dice Email" value={get("dice_email")} onChange={(v) => set("dice_email", v)} />
@@ -255,8 +267,9 @@ export function SettingsPanel() {
       </div>
 
       <p className="text-xs text-gray-600">
-        Settings are written to <code className="text-gray-500">data/settings.json</code> and take effect on next container restart.
-        Search keywords, locations, and limits are applied immediately on the next scrape/apply run.
+        Settings are written to <code className="text-gray-500">data/settings.json</code>.
+        Search params, locations, limits, and credentials are picked up on the next scrape/apply run — no restart needed.
+        Claude API key changes take effect after a container restart (the AI client is initialized at startup).
       </p>
     </div>
   );

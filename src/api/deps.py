@@ -29,7 +29,15 @@ def init_deps(config: Config, store: JobStore, browser: BrowserManager, ai: AICl
 
 def get_config() -> Config:
     assert _config is not None
-    return _config
+    # Re-apply saved settings overrides on every call so search params,
+    # limits, and credential changes take effect on the next task run
+    # without a container restart.  (AIClient is still initialized at startup
+    # with the credentials that were in effect then.)
+    from src.api.settings import load_settings
+    overrides = load_settings(_config)
+    if not overrides:
+        return _config
+    return _config.model_copy(update=overrides)
 
 
 def get_store() -> JobStore:

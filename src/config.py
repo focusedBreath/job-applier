@@ -13,6 +13,7 @@ class Config(BaseSettings):
     # Credentials
     linkedin_email: str = ""
     linkedin_password: str = ""
+    linkedin_manual_login: bool = False  # if True, skip auto login, let user login via noVNC
     indeed_email: str = ""
     indeed_password: str = ""
     dice_email: str = ""

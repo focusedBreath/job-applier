@@ -6,14 +6,17 @@ RUN npm ci
 COPY ui/ ./
 RUN npm run build
 
-# ── Stage 2: Python backend + Playwright + Xvfb ─────────────────
+# ── Stage 2: Python backend + Playwright + Xvfb + noVNC ─────────
 FROM python:3.12-slim
 
-# Xvfb + Playwright system dependencies
+# Xvfb + Playwright system dependencies + VNC stack
 RUN apt-get update && apt-get install -y --no-install-recommends \
     xvfb \
     xauth \
     x11-utils \
+    x11vnc \
+    novnc \
+    websockify \
     libglib2.0-0 \
     libnss3 \
     libnspr4 \
@@ -51,9 +54,11 @@ COPY --from=ui-builder /ui/dist ./src/static/
 # Create data directories (will be overridden by volume mounts)
 RUN mkdir -p /app/data /app/reports
 
-EXPOSE 8080
+# 8080 = app, 6080 = noVNC web viewer
+EXPOSE 8080 6080
 
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# Strip Windows CRLF line endings so the shebang works on Linux
+RUN sed -i 's/\r//' /entrypoint.sh && chmod +x /entrypoint.sh
 
 CMD ["/entrypoint.sh"]

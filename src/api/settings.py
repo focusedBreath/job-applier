@@ -43,6 +43,7 @@ class SettingsResponse(BaseModel):
     # Credentials
     linkedin_email: str
     linkedin_password: str
+    linkedin_manual_login: bool
     indeed_email: str
     indeed_password: str
     dice_email: str
@@ -67,6 +68,7 @@ class SettingsPatch(BaseModel):
     # All fields optional — only provided fields are updated
     linkedin_email: str | None = None
     linkedin_password: str | None = None
+    linkedin_manual_login: bool | None = None
     indeed_email: str | None = None
     indeed_password: str | None = None
     dice_email: str | None = None
@@ -89,6 +91,7 @@ def _effective(config: Config, overrides: dict) -> dict:
     base = {
         "linkedin_email": config.linkedin_email,
         "linkedin_password": config.linkedin_password,
+        "linkedin_manual_login": config.linkedin_manual_login,
         "indeed_email": config.indeed_email,
         "indeed_password": config.indeed_password,
         "dice_email": config.dice_email,
